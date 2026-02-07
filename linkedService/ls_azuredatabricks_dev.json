@@ -1,0 +1,14 @@
+{
+	"name": "ls_azuredatabricks_dev",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-7405615234329593.13.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/bbf1ebaf-46ce-4985-b809-e68ed4f51490/resourceGroups/dev/providers/Microsoft.Databricks/workspaces/jeit_kg_dev",
+			"existingClusterId": "0207-155036-f21w97z6"
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "jeit-kg-adf-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "643d0c4a-745c-4b1b-81ff-be284262cc7e",
+		"tenantId": "88ad4a03-8980-4da7-a85b-4e38eb048ff5"
+	}
+}
