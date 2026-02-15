@@ -1,0 +1,18 @@
+{
+	"name": "ds_world_bank_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_world_bank",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ljarrett"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/v2/country/JAM/indicator/SP.POP.TOTL?format=json"
+		},
+		"schema": []
+	}
+}
