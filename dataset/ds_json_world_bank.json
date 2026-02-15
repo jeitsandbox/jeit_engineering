@@ -5,6 +5,12 @@
 			"referenceName": "ls_jeit_sa",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string",
+				"defaultValue": "population.json"
+			}
+		},
 		"folder": {
 			"name": "ljarrett"
 		},
@@ -13,10 +19,76 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
 				"folderPath": "worldbank/population/jamaica/",
 				"fileSystem": "raw"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"page": {
+					"type": "integer"
+				},
+				"pages": {
+					"type": "integer"
+				},
+				"per_page": {
+					"type": "integer"
+				},
+				"total": {
+					"type": "integer"
+				},
+				"sourceid": {
+					"type": "string"
+				},
+				"lastupdated": {
+					"type": "string"
+				},
+				"indicator": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"country": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"countryiso3code": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string"
+				},
+				"value": {
+					"type": "integer"
+				},
+				"unit": {
+					"type": "string"
+				},
+				"obs_status": {
+					"type": "string"
+				},
+				"decimal": {
+					"type": "integer"
+				}
+			}
+		}
 	}
 }
