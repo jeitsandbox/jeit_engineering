@@ -5,12 +5,20 @@
 			"referenceName": "ls_jeit_sa",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"file_name": {
+				"type": "string",
+				"defaultValue": "generic_filename.txt"
+			}
+		},
+		"folder": {
+			"name": "ljarrett"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "EmployeeData-HhTLiz9LdC-2JpHdxGvrY.csv",
 				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",
