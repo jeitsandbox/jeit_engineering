@@ -1,0 +1,22 @@
+{
+	"name": "ds_json_world_bank",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_jeit_sa",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ljarrett"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "worldbank/population/jamaica/",
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {}
+	}
+}
