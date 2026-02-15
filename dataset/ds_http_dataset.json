@@ -1,0 +1,25 @@
+{
+	"name": "ds_http_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_http_anon_data",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ljarrett"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "/plotly/datasets/refs/heads/master/data.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
