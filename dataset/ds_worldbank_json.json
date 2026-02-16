@@ -9,6 +9,10 @@
 			"file_name": {
 				"type": "string",
 				"defaultValue": "jamaica.json"
+			},
+			"storage_path": {
+				"type": "string",
+				"defaultValue": "in/Country"
 			}
 		},
 		"annotations": [],
