@@ -1,91 +1,7 @@
 {
-	"name": "pl_01_api_ingestion_test_2",
+	"name": "pl_01_api_ingestion_foreach_loop",
 	"properties": {
 		"activities": [
-			{
-				"name": "Get World Bank Data",
-				"description": "Get World Bank Data",
-				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [
-					{
-						"activity": "Set country variable",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"paginationRules": {
-							"supportRFC5988": "true"
-						}
-					},
-					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_json_data",
-						"type": "DatasetReference",
-						"parameters": {
-							"country_name": {
-								"value": "@variables('CountryAbbr')",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_worldbank_json",
-						"type": "DatasetReference",
-						"parameters": {
-							"file_name": "jamica_gov_data.json",
-							"storage_path": "in/Country"
-						}
-					}
-				]
-			},
-			{
-				"name": "Set country variable",
-				"description": "Set country variable",
-				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CountryAbbr",
-					"value": "JAM"
-				}
-			},
 			{
 				"name": "Country List",
 				"type": "SetVariable",
@@ -127,14 +43,7 @@
 							"name": "Get World Bank Data_copy1",
 							"description": "Get World Bank Data",
 							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "Set variable1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -183,27 +92,13 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": "jamica_gov_data.json",
-										"storage_path": "in/Country"
+										"storage_path": {
+											"value": "@concat('in/Country/',item())",
+											"type": "Expression"
+										}
 									}
 								}
 							]
-						},
-						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "CountryItem",
-								"value": {
-									"value": "@item()",
-									"type": "Expression"
-								}
-							}
 						}
 					]
 				}
@@ -221,7 +116,7 @@
 			}
 		},
 		"folder": {
-			"name": "Test2"
+			"name": "Quick Synch Foreach Loop"
 		},
 		"annotations": []
 	}
