@@ -1,0 +1,19 @@
+{
+	"name": "ds_worldbank_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_container",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "in",
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {}
+	}
+}
