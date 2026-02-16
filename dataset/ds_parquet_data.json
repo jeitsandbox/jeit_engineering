@@ -1,0 +1,31 @@
+{
+	"name": "ds_parquet_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ad_nyc_tlc_cloudfront",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"taxiType": {
+				"type": "string"
+			},
+			"year": {
+				"type": "int"
+			},
+			"month": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@concat(dataset().taxiType,'_tripdata_',string(dataset().year),'-',dataset().month);",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}

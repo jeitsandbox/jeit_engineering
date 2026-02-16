@@ -3,87 +3,122 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "ForEach_Year",
-				"type": "ForEach",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@range(2023,2026)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Notebook1",
-				"type": "DatabricksNotebook",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": []
-			},
-			{
-				"name": "ForEach_Month",
-				"type": "ForEach",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@range(1,13)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "ForEach_Vehicle",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"yellow\",\"green\"]",
+						"value": "@variables('TaxiTypeArray')",
 						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Copy data2",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"enableStaging": false
+					},
+					"activities": [
+						{
+							"name": "ForEach_Year",
+							"type": "ForEach",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"items": {
+									"value": "@range(2023,2026)",
+									"type": "Expression"
+								},
+								"activities": [
+									{
+										"name": "ForEach_Month",
+										"type": "ForEach",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"items": {
+												"value": "@variables('MonthArray')",
+												"type": "Expression"
+											},
+											"activities": [
+												{
+													"name": "Get_NYC_TLC_Data",
+													"type": "Copy",
+													"dependsOn": [],
+													"policy": {
+														"timeout": "0.12:00:00",
+														"retry": 0,
+														"retryIntervalInSeconds": 30,
+														"secureOutput": false,
+														"secureInput": false
+													},
+													"userProperties": [],
+													"typeProperties": {
+														"source": {
+															"type": "BinarySource",
+															"storeSettings": {
+																"type": "HttpReadSettings",
+																"requestMethod": "GET"
+															},
+															"formatSettings": {
+																"type": "BinaryReadSettings"
+															}
+														},
+														"sink": {
+															"type": "ParquetSink",
+															"storeSettings": {
+																"type": "AzureBlobFSWriteSettings",
+																"copyBehavior": "FlattenHierarchy"
+															},
+															"formatSettings": {
+																"type": "ParquetWriteSettings"
+															}
+														},
+														"enableStaging": false
+													},
+													"inputs": [
+														{
+															"referenceName": "ds_parquet_data",
+															"type": "DatasetReference"
+														}
+													],
+													"outputs": [
+														{
+															"referenceName": "ds_nyc_tlc_parquet",
+															"type": "DatasetReference"
+														}
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					]
 				}
 			}
 		],
+		"variables": {
+			"TaxiTypeArray": {
+				"type": "Array",
+				"defaultValue": [
+					"yellow",
+					"green"
+				]
+			},
+			"MonthArray": {
+				"type": "Array",
+				"defaultValue": [
+					"01",
+					"02",
+					"03",
+					"04",
+					"05",
+					"06",
+					"07",
+					"08",
+					"09",
+					"10",
+					"11",
+					"12"
+				]
+			}
+		},
 		"annotations": []
 	}
 }
