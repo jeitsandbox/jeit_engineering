@@ -1,0 +1,13 @@
+{
+	"name": "ad_nyc_tlc_cloudfront",
+	"properties": {
+		"description": "HTTP linked service to pull yellow and green taxi records from the NYC TLC database",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://d37ci6vzurychx.cloudfront.net/trip-data/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
