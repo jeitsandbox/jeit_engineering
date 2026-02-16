@@ -24,7 +24,10 @@
 					"value": "@dataset().file_name",
 					"type": "Expression"
 				},
-				"folderPath": "in/JAM",
+				"folderPath": {
+					"value": "@dataset().storage_path",
+					"type": "Expression"
+				},
 				"fileSystem": "raw"
 			}
 		},
