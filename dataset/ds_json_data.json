@@ -14,7 +14,10 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "/v2/country/JAM/indicator/SP.POP.TOTL?format=json"
+			"relativeUrl": {
+				"value": "@concat('/v2/country/',dataset().country_name,'/indicator/SP.POP.TOTL?format=json')",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
