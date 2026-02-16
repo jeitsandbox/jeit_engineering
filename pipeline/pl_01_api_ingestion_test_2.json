@@ -6,6 +6,8 @@
 				"name": "Get World Bank Data",
 				"description": "Get World Bank Data",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set country variable",
@@ -71,6 +73,8 @@
 				"name": "Set country variable",
 				"description": "Set country variable",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
@@ -81,11 +85,30 @@
 					"variableName": "CountryAbbr",
 					"value": "JAM"
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CountryList",
+					"value": [
+						"['JAM','USA','BAR']"
+					]
+				}
 			}
 		],
 		"variables": {
 			"CountryAbbr": {
 				"type": "String"
+			},
+			"CountryList": {
+				"type": "Array"
 			}
 		},
 		"folder": {
