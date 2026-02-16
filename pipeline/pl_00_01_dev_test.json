@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Read REST API",
+				"description": "Copy data from API to Raw Container",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
