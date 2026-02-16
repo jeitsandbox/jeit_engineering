@@ -49,13 +49,13 @@
 													"userProperties": [],
 													"typeProperties": {
 														"source": {
-															"type": "BinarySource",
+															"type": "ParquetSource",
 															"storeSettings": {
 																"type": "HttpReadSettings",
 																"requestMethod": "GET"
 															},
 															"formatSettings": {
-																"type": "BinaryReadSettings"
+																"type": "ParquetReadSettings"
 															}
 														},
 														"sink": {
@@ -68,11 +68,19 @@
 																"type": "ParquetWriteSettings"
 															}
 														},
-														"enableStaging": false
+														"enableStaging": false,
+														"translator": {
+															"type": "TabularTranslator",
+															"typeConversion": true,
+															"typeConversionSettings": {
+																"allowDataTruncation": true,
+																"treatBooleanAsNumber": false
+															}
+														}
 													},
 													"inputs": [
 														{
-															"referenceName": "ds_parquet_data",
+															"referenceName": "ds_parquet_nyc_data",
 															"type": "DatasetReference"
 														}
 													],
