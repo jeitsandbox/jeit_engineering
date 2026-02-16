@@ -87,6 +87,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "Quick Sync2"
+		},
 		"annotations": []
 	}
 }
