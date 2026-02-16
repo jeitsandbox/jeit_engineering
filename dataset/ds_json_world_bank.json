@@ -5,12 +5,6 @@
 			"referenceName": "ls_jeit_sa",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"filename": {
-				"type": "string",
-				"defaultValue": "population.json"
-			}
-		},
 		"folder": {
 			"name": "ljarrett"
 		},
