@@ -19,10 +19,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				},
 				"folderPath": "in/worldbank/population/jamaica/",
 				"fileSystem": "raw"
 			}
