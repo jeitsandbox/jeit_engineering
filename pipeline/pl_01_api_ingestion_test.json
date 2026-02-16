@@ -40,7 +40,10 @@
 				"inputs": [
 					{
 						"referenceName": "ds_json_data",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"country_name": "USA"
+						}
 					}
 				],
 				"outputs": [
