@@ -1,0 +1,24 @@
+{
+	"name": "ds_json_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_gov_data",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"country_name": {
+				"type": "string",
+				"defaultValue": "JAM"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('/v2/country/',dataset().country_name,'/indicator/SP.POP.TOTL?format=json')",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	}
+}
