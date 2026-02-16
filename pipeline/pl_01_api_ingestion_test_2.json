@@ -98,7 +98,9 @@
 				"typeProperties": {
 					"variableName": "CountryList",
 					"value": [
-						"['JAM','USA','BAR']"
+						"'JAM'",
+						"'USA'",
+						"'BAR'"
 					]
 				}
 			}
