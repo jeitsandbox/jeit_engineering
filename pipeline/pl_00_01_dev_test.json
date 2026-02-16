@@ -3,10 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Read REST API",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -47,15 +45,12 @@
 				"outputs": [
 					{
 						"referenceName": "ds_json_world_bank",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "population.json"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "Copy data1_copy1",
+				"name": "supply file name",
 				"type": "Copy",
 				"state": "Inactive",
 				"onInactiveMarkAs": "Succeeded",
