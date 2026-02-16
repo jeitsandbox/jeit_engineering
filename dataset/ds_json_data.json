@@ -1,0 +1,15 @@
+{
+	"name": "ds_json_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_gov_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/v2/country/JAM/indicator/SP.POP.TOTL?format=json"
+		},
+		"schema": []
+	}
+}
