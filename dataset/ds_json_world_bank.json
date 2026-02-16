@@ -23,7 +23,7 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "worldbank/population/jamaica/",
+				"folderPath": "in/worldbank/population/jamaica/",
 				"fileSystem": "raw"
 			}
 		},
