@@ -91,7 +91,10 @@
 									"referenceName": "ds_worldbank_json",
 									"type": "DatasetReference",
 									"parameters": {
-										"file_name": "jamica_gov_data.json",
+										"file_name": {
+											"value": "@concat(item(),'.json')",
+											"type": "Expression"
+										},
 										"storage_path": {
 											"value": "@concat('in/Country/',item())",
 											"type": "Expression"
