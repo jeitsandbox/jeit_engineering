@@ -19,6 +19,9 @@
 			"transformations": [
 				{
 					"name": "slt1coingecko"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -86,7 +89,8 @@
 				"          total_volume",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> slt1coingecko"
+				"     skipDuplicateMapOutputs: true) ~> slt1coingecko",
+				"slt1coingecko derive() ~> derivedColumn1"
 			]
 		}
 	}
