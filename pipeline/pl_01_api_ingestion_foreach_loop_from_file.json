@@ -85,7 +85,7 @@
 											"type": "Expression"
 										},
 										"storage_path": {
-											"value": "@concat('in/Country/',item().CountryAbbrv)",
+											"value": "@concat('in/WorldGovData/',item().CountryAbbrv)",
 											"type": "Expression"
 										}
 									}
