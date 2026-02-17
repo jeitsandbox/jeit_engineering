@@ -5,6 +5,9 @@
 			"referenceName": "ls_blob_bronze",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

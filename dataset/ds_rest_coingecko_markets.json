@@ -19,6 +19,9 @@
 				"defaultValue": 1
 			}
 		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {

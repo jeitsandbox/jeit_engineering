@@ -11,6 +11,9 @@
 				"defaultValue": "USD"
 			}
 		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {

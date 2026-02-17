@@ -1,6 +1,9 @@
 {
 	"name": "df_silver_dim_coin_coingecko",
 	"properties": {
+		"folder": {
+			"name": "cryptosense_kp"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
@@ -18,7 +21,7 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> source1"
+				"     documentForm: 'arrayOfDocuments') ~> source1"
 			]
 		}
 	}
