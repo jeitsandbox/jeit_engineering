@@ -11,6 +11,9 @@
 			},
 			"year": {
 				"type": "int"
+			},
+			"month": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -18,6 +21,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().taxiType, '_tripdata_',string(dataset().year),'-',dataset().month)",
+					"type": "Expression"
+				},
 				"folderPath": {
 					"value": "@concat('in/nyc_tlc/',dataset().taxiType,'/',string(dataset().year))",
 					"type": "Expression"
