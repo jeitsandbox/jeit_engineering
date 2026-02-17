@@ -1,0 +1,19 @@
+{
+	"name": "ds_blob_bronze_coingecko_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "coingecko/markets",
+				"container": "bronze"
+			}
+		},
+		"schema": {}
+	}
+}
