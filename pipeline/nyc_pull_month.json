@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"01\",\"02]",
+						"value": "@variables('monthArray')",
 						"type": "Expression"
 					},
 					"activities": [
@@ -107,6 +107,15 @@
 			},
 			"year": {
 				"type": "int"
+			}
+		},
+		"variables": {
+			"monthArray": {
+				"type": "Array",
+				"defaultValue": [
+					"01",
+					"02"
+				]
 			}
 		},
 		"folder": {

@@ -24,7 +24,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "pipeline1",
+									"referenceName": "nyc_pull_month",
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true,
