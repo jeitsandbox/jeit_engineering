@@ -64,7 +64,7 @@
 				]
 			},
 			{
-				"name": "Set variable1",
+				"name": "odate",
 				"type": "SetVariable",
 				"dependsOn": [],
 				"policy": {
@@ -85,7 +85,7 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "odate",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -99,7 +99,7 @@
 				"typeProperties": {
 					"variableName": "file_path",
 					"value": {
-						"value": "@concat(variables('odate'),'/employee_data')",
+						"value": "@concat('employee_data/', variables('odate'))",
 						"type": "Expression"
 					}
 				}
