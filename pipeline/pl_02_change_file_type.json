@@ -1,0 +1,121 @@
+{
+	"name": "pl_02_change_file_type",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy CSV File and Save as JSON",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "destinatio file path",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_employee_csv_file",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_employee_data_json",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_directory": {
+								"value": "@variables('file_path')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "odate",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "odate",
+					"value": {
+						"value": "@formatDateTime(utcNow(),'yyyymmdd')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "destinatio file path",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "odate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_path",
+					"value": {
+						"value": "@concat('employee_data/in/',variables('odate'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"odate": {
+				"type": "String"
+			},
+			"file_path": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Quick Sync_Change File Types"
+		},
+		"annotations": []
+	}
+}

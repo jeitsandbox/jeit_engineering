@@ -1,0 +1,23 @@
+{
+	"name": "ds_employee_csv_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_jeit_sa",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "EmployeeData-HhTLiz9LdC-2JpHdxGvrY(1).csv",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

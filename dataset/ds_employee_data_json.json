@@ -1,0 +1,89 @@
+{
+	"name": "ds_employee_data_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_jeit_sa",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_directory": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().file_directory",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"page": {
+					"type": "integer"
+				},
+				"pages": {
+					"type": "integer"
+				},
+				"per_page": {
+					"type": "integer"
+				},
+				"total": {
+					"type": "integer"
+				},
+				"sourceid": {
+					"type": "string"
+				},
+				"lastupdated": {
+					"type": "string"
+				},
+				"indicator": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"country": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"value": {
+							"type": "string"
+						}
+					}
+				},
+				"countryiso3code": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string"
+				},
+				"value": {
+					"type": "integer"
+				},
+				"unit": {
+					"type": "string"
+				},
+				"obs_status": {
+					"type": "string"
+				},
+				"decimal": {
+					"type": "integer"
+				}
+			}
+		}
+	}
+}
