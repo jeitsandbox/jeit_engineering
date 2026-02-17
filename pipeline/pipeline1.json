@@ -1,0 +1,68 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "taxiTypeVar",
+					"value": {
+						"value": "@pipeline().parameters.taxiType",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "yearVar",
+					"value": {
+						"value": "@pipeline().parameters.year",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"taxiType": {
+				"type": "string"
+			},
+			"year": {
+				"type": "int"
+			}
+		},
+		"variables": {
+			"taxiTypeVar": {
+				"type": "String"
+			},
+			"yearVar": {
+				"type": "Integer"
+			}
+		},
+		"folder": {
+			"name": "NYC_DATA/NYC_DATA_PULL_TEST"
+		},
+		"annotations": []
+	}
+}
