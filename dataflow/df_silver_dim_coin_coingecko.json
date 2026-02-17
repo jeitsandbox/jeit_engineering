@@ -55,7 +55,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine',",
-				"     wildcardPaths:['coingecko/markets/*/*.json']) ~> src1coingecko",
+				"     wildcardPaths:['crytpsense/coingecko/markets/*/*.json']) ~> src1coingecko",
 				"src1coingecko select(mapColumn(",
 				"          ath,",
 				"          ath_change_percentage,",
