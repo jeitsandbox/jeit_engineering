@@ -88,6 +88,10 @@
 										"year": {
 											"value": "@pipeline().parameters.year",
 											"type": "Expression"
+										},
+										"month": {
+											"value": "@item()",
+											"type": "Expression"
 										}
 									}
 								}
