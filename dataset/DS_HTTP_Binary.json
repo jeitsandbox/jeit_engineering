@@ -1,0 +1,22 @@
+{
+	"name": "DS_HTTP_Binary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NYC_TLC_Cloudfront",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"fileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "@dataset().fileName"
+			}
+		}
+	}
+}
