@@ -1,0 +1,119 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "GET_FILE_LIST",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GET_FILE_LIST",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GET_FILE_LIST').output.files",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"batchCount": 10,
+					"activities": [
+						{
+							"name": "Copy_Taxi_File",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_HTTP_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_Blob_Binary",
+									"type": "DatasetReference",
+									"parameters": {
+										"containerName": "nyc-taxi-raw",
+										"folderPath": "@concat(item().type, '/', item().year)",
+										"fileName": "@item().name"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "NYC_DATA"
+		},
+		"annotations": []
+	}
+}

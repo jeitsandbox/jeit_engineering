@@ -1,0 +1,43 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_NYC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "nyc_taxi_files.json.json",
+				"container": "config"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"files": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"year": {
+								"type": "integer"
+							},
+							"month": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
