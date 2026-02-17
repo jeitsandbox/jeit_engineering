@@ -17,7 +17,7 @@
 					"value": "cryptosense/coinbase/exchange-rates/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
 					"type": "Expression"
 				},
-				"container": "bronze"
+				"container": "raw"
 			}
 		},
 		"schema": {}

@@ -14,7 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "cryptosense/coinbase/exchange-rates",
-				"container": "bronze"
+				"container": "raw"
 			}
 		},
 		"schema": {}

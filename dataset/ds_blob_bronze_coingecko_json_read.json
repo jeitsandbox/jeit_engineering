@@ -14,7 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "cryptosense/coingecko/markets",
-				"container": "bronze"
+				"container": "raw"
 			}
 		},
 		"schema": {}

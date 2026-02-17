@@ -14,7 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "cryptosense/fact_exchange_rate",
-				"container": "silver"
+				"container": "filtered"
 			},
 			"compressionCodec": "snappy"
 		},
