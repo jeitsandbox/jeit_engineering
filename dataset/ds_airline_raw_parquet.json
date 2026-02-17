@@ -1,0 +1,20 @@
+{
+	"name": "ds_airline_raw_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_arline_dev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "raw",
+				"fileSystem": "airlineperformance"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
