@@ -3,31 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Country List",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "CountryList",
-					"value": [
-						"JAM",
-						"USA",
-						"BEN",
-						"ALB",
-						"DZA"
-					]
-				}
-			},
-			{
 				"name": "ForEach1",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Country List",
+						"activity": "Lookup File Contents",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -36,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('CountryList')",
+						"value": "@activity('Lookup File Contents').output.value",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -45,6 +25,8 @@
 							"name": "Get World Bank Data_copy1",
 							"description": "Get World Bank Data",
 							"type": "Copy",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -104,8 +86,56 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "CountryListFromFile",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Lookup File Contents",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_txt_file",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
@@ -117,6 +147,9 @@
 				"type": "Array"
 			},
 			"CountryItem": {
+				"type": "String"
+			},
+			"CountryListFromFile": {
 				"type": "String"
 			}
 		},
