@@ -22,7 +22,7 @@
 			"location": {
 				"type": "HttpServerLocation",
 				"relativeUrl": {
-					"value": "@concat(dataset().taxiType,'_tripdata_',string(dataset().year),'-',dataset().month,'.parquet');",
+					"value": "@concat(dataset().taxiType,'_tripdata_',string(dataset().year),'-',dataset().month,'.parquet')",
 					"type": "Expression"
 				}
 			},
