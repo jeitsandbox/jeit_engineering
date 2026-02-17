@@ -13,7 +13,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "coingecko/markets/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
+				"folderPath": {
+					"value": "cryptosense/coingecko/markets/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
+					"type": "Expression"
+				},
 				"container": "bronze"
 			}
 		},

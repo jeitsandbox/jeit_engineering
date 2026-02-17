@@ -13,7 +13,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "coinbase/exchange-rates/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
+				"folderPath": {
+					"value": "cryptosense/coinbase/exchange-rates/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
+					"type": "Expression"
+				},
 				"container": "bronze"
 			}
 		},

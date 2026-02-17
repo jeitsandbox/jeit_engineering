@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "dim_coin",
+				"folderPath": "cryptosense/dim_coin",
 				"container": "silver"
 			},
 			"compressionCodec": "snappy"
