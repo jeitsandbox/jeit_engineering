@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "raw",
-				"fileSystem": "airlineperformance"
+				"folderPath": "airlineperformance",
+				"fileSystem": "raw"
 			},
 			"compressionCodec": "snappy"
 		},
