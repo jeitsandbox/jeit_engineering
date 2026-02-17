@@ -5,16 +5,14 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@range(2023,2026)",
+						"value": "@range(2023,3)",
 						"type": "Expression"
 					},
-					"isSequential": false,
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Execute Pipeline1",
@@ -44,23 +42,6 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "years",
-					"value": {
-						"value": "[2023,2024,2025]",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
@@ -70,7 +51,12 @@
 		},
 		"variables": {
 			"years": {
-				"type": "Array"
+				"type": "Array",
+				"defaultValue": [
+					2023,
+					2024,
+					2025
+				]
 			}
 		},
 		"folder": {
