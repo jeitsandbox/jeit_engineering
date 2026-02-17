@@ -2,11 +2,12 @@
 	"name": "ls_blob_bronze",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"description": "kp",
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"connectionString": "DefaultEndpointsProtocol=https;AccountName=jeitsadev;EndpointSuffix=core.windows.net;",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDQ5Njk0MDA5LTA0OEItNDBBNi1BRTk5LTc0MzI0RTc1QzlBNV9jMzJiMzM4Mi1lM2Y2LTQwN2QtOWFiYi04ZWYwMmE3YTE5MGEiDQp9"
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=jeitstorageaccountdev;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDQ5Njk0MDA5LTA0OEItNDBBNi1BRTk5LTc0MzI0RTc1QzlBNV84MzViYjkyZi00ZGMxLTQwNWEtOTY3Yi04Zjk0ZjYzODcxMjUiDQp9"
 		}
 	}
 }
