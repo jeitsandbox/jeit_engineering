@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"yellow\",\"green\"]",
+						"value": "@variables('taxiTypeArray')",
 						"type": "Expression"
 					},
 					"activities": [
@@ -39,6 +39,15 @@
 				}
 			}
 		],
+		"variables": {
+			"taxiTypeArray": {
+				"type": "Array",
+				"defaultValue": [
+					"yellow",
+					"green"
+				]
+			}
+		},
 		"folder": {
 			"name": "NYC_DATA/NYC_DATA_PULL_TEST"
 		},
