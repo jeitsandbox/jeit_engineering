@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_blob_bronze_coingecko_json",
+						"referenceName": "ds_blob_bronze_coingecko_json_read",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
