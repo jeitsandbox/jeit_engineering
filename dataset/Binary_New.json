@@ -1,0 +1,17 @@
+{
+	"name": "Binary_New",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1_new",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "raw"
+			}
+		}
+	}
+}
