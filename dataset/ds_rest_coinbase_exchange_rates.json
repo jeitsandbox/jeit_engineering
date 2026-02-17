@@ -1,0 +1,21 @@
+{
+	"name": "ds_rest_coinbase_exchange_rates",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_coinbase_public",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"base_currency": {
+				"type": "string",
+				"defaultValue": "USD"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/v2/exchange-rates"
+		},
+		"schema": []
+	}
+}
