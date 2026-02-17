@@ -5,12 +5,23 @@
 			"referenceName": "ls_adls_container",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"taxiType": {
+				"type": "string"
+			},
+			"year": {
+				"type": "int"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "in",
+				"folderPath": {
+					"value": "@concat('in/nyc_tlc/',dataset().taxiType,'/',string(dataset().year))",
+					"type": "Expression"
+				},
 				"fileSystem": "raw"
 			},
 			"compressionCodec": "snappy"

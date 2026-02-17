@@ -59,13 +59,37 @@
 							"inputs": [
 								{
 									"referenceName": "ds_nyc_cf_parquet",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"taxiType": {
+											"value": "@pipeline().parameters.taxiType",
+											"type": "Expression"
+										},
+										"year": {
+											"value": "@pipeline().parameters.year",
+											"type": "Expression"
+										},
+										"month": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
 									"referenceName": "ds_adls_nyc",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"taxiType": {
+											"value": "@pipeline().parameters.taxiType",
+											"type": "Expression"
+										},
+										"year": {
+											"value": "@pipeline().parameters.year",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}

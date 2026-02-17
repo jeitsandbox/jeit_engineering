@@ -26,16 +26,26 @@
 									"referenceName": "nyc_pull_month",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"taxiType": {
+										"value": "@pipeline().parameters.taxiType",
+										"type": "Expression"
+									},
+									"year": {
+										"value": "@item()",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
 				}
 			}
 		],
-		"variables": {
+		"parameters": {
 			"taxiType": {
-				"type": "String"
+				"type": "string"
 			}
 		},
 		"folder": {
