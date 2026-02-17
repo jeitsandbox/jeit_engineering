@@ -5,6 +5,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -42,11 +44,33 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "years",
+					"value": {
+						"value": "[2023,2024,2025]",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
 			"taxiType": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"years": {
+				"type": "Array"
 			}
 		},
 		"folder": {
