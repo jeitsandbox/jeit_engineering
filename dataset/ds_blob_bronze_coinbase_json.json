@@ -1,5 +1,5 @@
 {
-	"name": "ls_blob_bronze_coinbase_json",
+	"name": "ds_blob_bronze_coinbase_json",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_blob_bronze",
@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "exchange-rates.json",
 				"folderPath": "coinbase/exchange-rates",
 				"container": "bronze"
 			}
