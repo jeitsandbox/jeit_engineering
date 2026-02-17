@@ -1,0 +1,23 @@
+{
+	"name": "ds_blob_silver_dim_coin_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "cryptosense/dim_coin",
+				"container": "filtered"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

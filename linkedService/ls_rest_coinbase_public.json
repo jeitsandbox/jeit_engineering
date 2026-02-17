@@ -1,0 +1,13 @@
+{
+	"name": "ls_rest_coinbase_public",
+	"properties": {
+		"description": "Simple Table",
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://api.coinbase.com",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

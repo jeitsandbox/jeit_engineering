@@ -1,0 +1,23 @@
+{
+	"name": "ds_blob_silver_fact_exchange_rate_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "cryptosense/fact_exchange_rate",
+				"container": "filtered"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

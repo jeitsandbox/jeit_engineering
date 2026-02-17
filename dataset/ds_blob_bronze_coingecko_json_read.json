@@ -1,0 +1,22 @@
+{
+	"name": "ds_blob_bronze_coingecko_json_read",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "cryptosense/coingecko/markets",
+				"container": "raw"
+			}
+		},
+		"schema": {}
+	}
+}
