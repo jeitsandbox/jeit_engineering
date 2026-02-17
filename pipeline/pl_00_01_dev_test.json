@@ -47,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ls_blob_bronze_coinbase_json",
+						"referenceName": "ds_blob_bronze_coinbase_json",
 						"type": "DatasetReference"
 					}
 				]
