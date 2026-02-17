@@ -1,0 +1,20 @@
+{
+	"name": "ds_blob_silver_dim_coin_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "dim_coin",
+				"container": "silver"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
