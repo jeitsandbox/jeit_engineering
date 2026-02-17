@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "markets.json",
 				"folderPath": "coingecko/markets",
 				"container": "bronze"
 			}
