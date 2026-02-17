@@ -46,7 +46,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('GET_FILE_LIST').output.files",
+						"value": "@activity('GET_FILE_LIST').output.firstRow.files",
 						"type": "Expression"
 					},
 					"isSequential": false,
