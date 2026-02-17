@@ -99,7 +99,7 @@
 				"typeProperties": {
 					"variableName": "file_path",
 					"value": {
-						"value": "@concat('employee_data/in/', variables('odate'))",
+						"value": "@concat('employee_data/in/',variables('odate'))",
 						"type": "Expression"
 					}
 				}
