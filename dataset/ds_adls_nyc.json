@@ -1,0 +1,20 @@
+{
+	"name": "ds_adls_nyc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_container",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "in",
+				"fileSystem": "raw"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
