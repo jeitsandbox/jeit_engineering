@@ -1,0 +1,24 @@
+{
+	"name": "trg_bronze_crypto_poll_1m",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_00_01_dev_test",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2026-02-17T16:12:00",
+				"timeZone": "SA Pacific Standard Time"
+			}
+		}
+	}
+}
