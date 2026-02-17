@@ -19,7 +19,8 @@
 						"value": "@activity('Lookup File Contents').output.value",
 						"type": "Expression"
 					},
-					"isSequential": true,
+					"isSequential": false,
+					"batchCount": 5,
 					"activities": [
 						{
 							"name": "Get World Bank Data_copy1",
@@ -81,7 +82,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"file_name": {
-											"value": "@concat(item(),'.json')",
+											"value": "@concat(item().CountryAbbrv,'.json')",
 											"type": "Expression"
 										},
 										"storage_path": {
