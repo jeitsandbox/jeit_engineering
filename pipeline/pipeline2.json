@@ -42,7 +42,26 @@
 								"expression": {
 									"value": "@if(endswith(item().name, '.csv'),'true','false')",
 									"type": "Expression"
-								}
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Set variable2",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "fname",
+											"value": {
+												"value": "@pipeline().parameters.items",
+												"type": "Expression"
+											}
+										}
+									}
+								]
 							}
 						}
 					]
@@ -62,6 +81,9 @@
 				"type": "Array"
 			},
 			"filename": {
+				"type": "String"
+			},
+			"fname": {
 				"type": "String"
 			}
 		},
