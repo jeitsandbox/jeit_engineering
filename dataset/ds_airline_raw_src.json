@@ -1,0 +1,18 @@
+{
+	"name": "ds_airline_raw_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_arline_dev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "in/airline",
+				"fileSystem": "raw"
+			}
+		}
+	}
+}
