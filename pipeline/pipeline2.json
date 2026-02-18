@@ -1,9 +1,36 @@
 {
 	"name": "pipeline2",
 	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test2",
+					"value": {
+						"value": "@pipeline().parameters.items",
+						"type": "Expression"
+					}
+				}
+			}
+		],
 		"parameters": {
 			"items": {
 				"type": "array"
+			}
+		},
+		"variables": {
+			"TEst": {
+				"type": "String"
+			},
+			"test2": {
+				"type": "Array"
 			}
 		},
 		"folder": {
