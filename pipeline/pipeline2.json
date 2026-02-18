@@ -17,13 +17,18 @@
 						{
 							"name": "If Condition1",
 							"type": "IfCondition",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Set variable3",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@if(endswith(item().name, '.csv'),'true','false')",
+									"value": "@endswith(item().name, '.csv')",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -38,10 +43,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "filename",
-											"value": {
-												"value": "@pipeline().parameters.items[1]",
-												"type": "Expression"
-											}
+											"value": "This is a test"
 										}
 									}
 								]
