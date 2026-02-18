@@ -1,0 +1,27 @@
+{
+	"name": "ds_population_raw_tsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_jeit_sa",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "testing/sharlmagne"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "population_by_age.tsv",
+				"folderPath": "testing/sharlmagne_henry",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": "\t",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
