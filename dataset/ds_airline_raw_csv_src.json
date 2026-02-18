@@ -1,5 +1,5 @@
 {
-	"name": "ds_airline_raw_csv_adls",
+	"name": "ds_airline_raw_csv_src",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls_arline_dev",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "airlineperformance/csv",
+				"folderPath": "in/airline",
 				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",

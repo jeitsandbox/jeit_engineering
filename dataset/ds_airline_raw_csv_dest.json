@@ -1,0 +1,23 @@
+{
+	"name": "ds_airline_raw_csv_dest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_arline_dev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "airlineperformance",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
