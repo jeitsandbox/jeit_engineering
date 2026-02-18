@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pl_01_ReadMetadata_master",
 	"properties": {
 		"activities": [
 			{
@@ -63,7 +63,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "pipeline2",
+									"referenceName": "Pl_02_readmetadata_child",
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true,
