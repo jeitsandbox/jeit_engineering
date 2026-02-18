@@ -1,0 +1,53 @@
+{
+	"name": "ds_json_objects",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_jeit_sa",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "metadata",
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"customer_id": {
+					"type": "integer"
+				},
+				"first_name": {
+					"type": "string"
+				},
+				"last_name": {
+					"type": "string"
+				},
+				"country": {
+					"type": "string"
+				},
+				"signup_date": {
+					"type": "string"
+				},
+				"order_id": {
+					"type": "integer"
+				},
+				"product_id": {
+					"type": "integer"
+				},
+				"order_date": {
+					"type": "string"
+				},
+				"quantity": {
+					"type": "integer"
+				},
+				"total_amount": {
+					"type": "integer"
+				}
+			}
+		}
+	}
+}
