@@ -69,7 +69,7 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"items": {
-										"value": "@activity('Get Metadata1').output.childItems",
+										"value": "@activity('Read Metadata').output.childItems",
 										"type": "Expression"
 									}
 								}
