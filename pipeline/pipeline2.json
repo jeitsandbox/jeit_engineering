@@ -1,0 +1,14 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"parameters": {
+			"items": {
+				"type": "array"
+			}
+		},
+		"folder": {
+			"name": "Quick Sync Metadata"
+		},
+		"annotations": []
+	}
+}
