@@ -54,7 +54,7 @@
 					},
 					"ifTrueActivities": [
 						{
-							"name": "Execute Pipeline1",
+							"name": "Execute Child Pipeline",
 							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
