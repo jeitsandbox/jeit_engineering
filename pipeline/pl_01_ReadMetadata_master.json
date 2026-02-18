@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata1",
+				"name": "Read Metadata",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -40,7 +40,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "Read Metadata",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -49,7 +49,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@activity('Get Metadata1').output.exists",
+						"value": "@activity('Read Metadata').output.exists",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
