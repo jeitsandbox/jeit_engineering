@@ -19,7 +19,7 @@
 							"type": "IfCondition",
 							"dependsOn": [
 								{
-									"activity": "Set variable3",
+									"activity": "File Name",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -33,7 +33,7 @@
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Set variable2",
+										"name": "File Name Var",
 										"type": "SetVariable",
 										"dependsOn": [],
 										"policy": {
@@ -53,7 +53,7 @@
 							}
 						},
 						{
-							"name": "Set variable3",
+							"name": "File Name",
 							"type": "SetVariable",
 							"dependsOn": [],
 							"policy": {
