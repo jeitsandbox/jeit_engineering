@@ -1,0 +1,32 @@
+{
+	"name": "ds_rest_coingecko_markets_dec15_jan15",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_coingecko_public",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"vs_currency": {
+				"type": "string",
+				"defaultValue": "usd"
+			},
+			"per_page": {
+				"type": "int",
+				"defaultValue": 250
+			},
+			"page": {
+				"type": "int",
+				"defaultValue": 1
+			}
+		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/api/v3/coins/markets"
+		},
+		"schema": []
+	}
+}
