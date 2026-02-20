@@ -17,6 +17,14 @@
 			"page": {
 				"type": "int",
 				"defaultValue": 1
+			},
+			"order": {
+				"type": "string",
+				"defaultValue": "market_cap_desc"
+			},
+			"sparkline": {
+				"type": "string",
+				"defaultValue": "false"
 			}
 		},
 		"folder": {
