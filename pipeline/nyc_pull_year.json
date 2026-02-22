@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@range(2023,3)",
+						"value": "@pipeline().parameters.yearArray",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -36,6 +36,10 @@
 									"year": {
 										"value": "@item()",
 										"type": "Expression"
+									},
+									"monthArray": {
+										"value": "@pipeline().parameters.monthArray",
+										"type": "Expression"
 									}
 								}
 							}
@@ -47,6 +51,12 @@
 		"parameters": {
 			"taxiType": {
 				"type": "string"
+			},
+			"yearArray": {
+				"type": "array"
+			},
+			"monthArray": {
+				"type": "array"
 			}
 		},
 		"variables": {

@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('monthArray')",
+						"value": "@pipeline().parameters.monthArray",
 						"type": "Expression"
 					},
 					"activities": [
@@ -107,15 +107,9 @@
 			},
 			"year": {
 				"type": "int"
-			}
-		},
-		"variables": {
+			},
 			"monthArray": {
-				"type": "Array",
-				"defaultValue": [
-					"01",
-					"02"
-				]
+				"type": "array"
 			}
 		},
 		"folder": {
