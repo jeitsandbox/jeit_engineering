@@ -90,7 +90,7 @@
 				"typeProperties": {
 					"variableName": "yearArray",
 					"value": {
-						"value": "@range(2023, 1)",
+						"value": "@range(2023, 3)",
 						"type": "Expression"
 					}
 				}
@@ -114,8 +114,18 @@
 				"typeProperties": {
 					"variableName": "monthArray",
 					"value": [
+						"01",
+						"02",
 						"03",
-						"04"
+						"04",
+						"05",
+						"06",
+						"07",
+						"08",
+						"09",
+						"10",
+						"11",
+						"12"
 					]
 				}
 			}
