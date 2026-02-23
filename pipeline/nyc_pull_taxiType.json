@@ -5,18 +5,11 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "Set variable3",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('taxiTypeArray')",
+						"value": "@pipeline().parameters.taxiTypeArray",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -41,11 +34,11 @@
 										"type": "Expression"
 									},
 									"yearArray": {
-										"value": "@variables('yearArray')",
+										"value": "@pipeline().parameters.yearArray",
 										"type": "Expression"
 									},
 									"monthArray": {
-										"value": "@variables('monthArray')",
+										"value": "@pipeline().parameters.monthArray",
 										"type": "Expression"
 									}
 								}
@@ -53,93 +46,18 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "taxiTypeArray",
-					"value": [
-						"yellow",
-						"green"
-					]
-				}
-			},
-			{
-				"name": "Set variable2",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "yearArray",
-					"value": {
-						"value": "@range(2023, 3)",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Set variable3",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variable2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "monthArray",
-					"value": [
-						"01",
-						"02",
-						"03",
-						"04",
-						"05",
-						"06",
-						"07",
-						"08",
-						"09",
-						"10",
-						"11",
-						"12"
-					]
-				}
 			}
 		],
-		"variables": {
+		"parameters": {
 			"taxiTypeArray": {
-				"type": "Array",
+				"type": "array",
 				"defaultValue": [
 					"yellow",
 					"green"
 				]
 			},
 			"yearArray": {
-				"type": "Array",
+				"type": "array",
 				"defaultValue": [
 					2023,
 					2024,
@@ -147,7 +65,7 @@
 				]
 			},
 			"monthArray": {
-				"type": "Array",
+				"type": "array",
 				"defaultValue": [
 					"01",
 					"02",
