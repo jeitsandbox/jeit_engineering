@@ -105,7 +105,7 @@
 				]
 			},
 			{
-				"name": "02_Silver_Transformations",
+				"name": "02_1_Silver_Streaming_AutoLoader",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
@@ -130,7 +130,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/Cryptosense/02_Silver_Transformations"
+					"notebookPath": "/Shared/Cryptosense/02_1_Silver_Streaming_AutoLoader"
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_azuredatabricks_dev",
