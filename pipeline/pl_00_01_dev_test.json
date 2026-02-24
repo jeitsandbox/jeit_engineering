@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "copy_coinbase_to_blob_bronze",
+				"description": "copy sactivity",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
