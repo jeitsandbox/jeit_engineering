@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "pl_00_01_dev_test",
+					"referenceName": "pl_01_cs_raw_dev_main",
 					"type": "PipelineReference"
 				}
 			}

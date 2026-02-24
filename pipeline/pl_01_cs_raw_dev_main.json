@@ -1,5 +1,5 @@
 {
-	"name": "pl_00_01_dev_test",
+	"name": "pl_01_cs_raw_dev_main",
 	"properties": {
 		"activities": [
 			{
@@ -139,6 +139,20 @@
 				}
 			}
 		],
+		"parameters": {
+			"environment": {
+				"type": "string",
+				"defaultValue": "dev"
+			},
+			"catalog_name": {
+				"type": "string",
+				"defaultValue": "jeit_kg_dev"
+			},
+			"schema_name": {
+				"type": "string",
+				"defaultValue": "trusted_cryptosense"
+			}
+		},
 		"annotations": []
 	}
 }
