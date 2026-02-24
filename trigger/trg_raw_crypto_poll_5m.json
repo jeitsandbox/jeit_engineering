@@ -1,5 +1,5 @@
 {
-	"name": "trg_bronze_crypto_poll_1m",
+	"name": "trg_raw_crypto_poll_5m",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -15,7 +15,7 @@
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
-				"interval": 1,
+				"interval": 5,
 				"startTime": "2026-02-17T16:12:00",
 				"timeZone": "SA Pacific Standard Time"
 			}
