@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "jeit-kg-adf-dev"
+		},
+		"AzureBlobStorage1_new_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage_NYC_connectionString": {
+			"value": ""
+		},
+		"ls_adls_arline_dev_accountKey": {
+			"value": ""
+		},
+		"ls_adls_container_accountKey": {
+			"value": ""
+		},
+		"ls_adls_nyc_container_accountKey": {
+			"value": ""
+		},
+		"ls_blob_bronze_connectionString": {
+			"value": ""
+		},
+		"ls_jeit_sa_accountKey": {
+			"value": ""
+		},
+		"ls_adls_arline_dev_properties_typeProperties_url": {
+			"value": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_adls_container_properties_typeProperties_url": {
+			"value": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_adls_nyc_container_properties_typeProperties_url": {
+			"value": "https://jeitsadev2.dfs.core.windows.net/"
+		},
+		"ls_azuredatabricks_dev_properties_typeProperties_existingClusterId": {
+			"value": "0207-155036-f21w97z6"
+		},
+		"ls_jeit_sa_properties_typeProperties_url": {
+			"value": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_rest_coinbase_public_properties_typeProperties_url": {
+			"value": "https://api.coinbase.com"
+		},
+		"ls_rest_coingecko_public_properties_typeProperties_url": {
+			"value": "https://api.coingecko.com"
+		},
+		"ls_rest_gov_data_properties_typeProperties_url": {
+			"value": "https://api.worldbank.org"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

@@ -1,0 +1,167 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "jeit-kg-adf-dev"
+		},
+		"AzureBlobStorage1_new_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1_new'"
+		},
+		"AzureBlobStorage_NYC_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage_NYC'"
+		},
+		"ls_adls_arline_dev_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_arline_dev'"
+		},
+		"ls_adls_container_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_container'"
+		},
+		"ls_adls_nyc_container_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_nyc_container'"
+		},
+		"ls_blob_bronze_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_blob_bronze'"
+		},
+		"ls_jeit_sa_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_jeit_sa'"
+		},
+		"ls_adls_arline_dev_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_adls_container_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_adls_nyc_container_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jeitsadev2.dfs.core.windows.net/"
+		},
+		"ls_azuredatabricks_dev_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0207-155036-f21w97z6"
+		},
+		"ls_jeit_sa_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jeitstorageaccountdev.dfs.core.windows.net/"
+		},
+		"ls_rest_coinbase_public_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.coinbase.com"
+		},
+		"ls_rest_coingecko_public_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.coingecko.com"
+		},
+		"ls_rest_gov_data_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.worldbank.org"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "jeit-kg-adf-dev_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_new_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_new_connectionString')]"
+					},
+					"AzureBlobStorage_NYC_connectionString": {
+						"value": "[parameters('AzureBlobStorage_NYC_connectionString')]"
+					},
+					"ls_adls_arline_dev_accountKey": {
+						"value": "[parameters('ls_adls_arline_dev_accountKey')]"
+					},
+					"ls_adls_container_accountKey": {
+						"value": "[parameters('ls_adls_container_accountKey')]"
+					},
+					"ls_adls_nyc_container_accountKey": {
+						"value": "[parameters('ls_adls_nyc_container_accountKey')]"
+					},
+					"ls_blob_bronze_connectionString": {
+						"value": "[parameters('ls_blob_bronze_connectionString')]"
+					},
+					"ls_jeit_sa_accountKey": {
+						"value": "[parameters('ls_jeit_sa_accountKey')]"
+					},
+					"ls_adls_arline_dev_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_arline_dev_properties_typeProperties_url')]"
+					},
+					"ls_adls_container_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_container_properties_typeProperties_url')]"
+					},
+					"ls_adls_nyc_container_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_nyc_container_properties_typeProperties_url')]"
+					},
+					"ls_azuredatabricks_dev_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_azuredatabricks_dev_properties_typeProperties_existingClusterId')]"
+					},
+					"ls_jeit_sa_properties_typeProperties_url": {
+						"value": "[parameters('ls_jeit_sa_properties_typeProperties_url')]"
+					},
+					"ls_rest_coinbase_public_properties_typeProperties_url": {
+						"value": "[parameters('ls_rest_coinbase_public_properties_typeProperties_url')]"
+					},
+					"ls_rest_coingecko_public_properties_typeProperties_url": {
+						"value": "[parameters('ls_rest_coingecko_public_properties_typeProperties_url')]"
+					},
+					"ls_rest_gov_data_properties_typeProperties_url": {
+						"value": "[parameters('ls_rest_gov_data_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "jeit-kg-adf-dev_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'jeit-kg-adf-dev_ArmTemplate_0')]"
+			]
+		}
+	]
+}
