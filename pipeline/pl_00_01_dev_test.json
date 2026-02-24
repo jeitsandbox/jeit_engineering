@@ -103,6 +103,39 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "02_Silver_Transformations",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "copy_coinbase_to_blob_bronze",
+						"dependencyConditions": [
+							"Completed"
+						]
+					},
+					{
+						"activity": "copy_coingecko_to_blob_bronze",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Cryptosense/02_Silver_Transformations"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azuredatabricks_dev",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
