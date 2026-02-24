@@ -1,12 +1,12 @@
 {
-	"name": "trg_bronze_crypto_poll_1m",
+	"name": "trg_raw_crypto_poll_5m",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "pl_00_01_dev_test",
+					"referenceName": "pl_01_cs_raw_dev_main",
 					"type": "PipelineReference"
 				}
 			}
@@ -15,7 +15,7 @@
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Minute",
-				"interval": 1,
+				"interval": 5,
 				"startTime": "2026-02-17T16:12:00",
 				"timeZone": "SA Pacific Standard Time"
 			}

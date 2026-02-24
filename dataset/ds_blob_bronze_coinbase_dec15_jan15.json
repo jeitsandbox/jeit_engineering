@@ -1,0 +1,22 @@
+{
+	"name": "ds_blob_bronze_coinbase_dec15_jan15",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_bronze",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "cryptosense_kp"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "cryptosense/dec15-jan15/coingecko/markets/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
+				"container": "raw"
+			}
+		},
+		"schema": {}
+	}
+}
