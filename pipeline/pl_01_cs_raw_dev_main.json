@@ -151,6 +151,10 @@
 			"schema_name": {
 				"type": "string",
 				"defaultValue": "trusted_cryptosense"
+			},
+			"notebook_path": {
+				"type": "string",
+				"defaultValue": "/Shared/Cryptosense/02_1_Silver_Streaming_AutoLoader"
 			}
 		},
 		"annotations": []
