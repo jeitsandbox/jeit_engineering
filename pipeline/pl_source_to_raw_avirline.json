@@ -1,0 +1,108 @@
+{
+	"name": "pl_source_to_raw_avirline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_airline_raw_rest",
+						"type": "DatasetReference",
+						"parameters": {
+							"p_access_key": {
+								"value": "@pipeline().parameters.p_apiKey",
+								"type": "Expression"
+							},
+							"p_offset": {
+								"value": "@variables('v_offset')",
+								"type": "Expression"
+							},
+							"p_flight_date": {
+								"value": "@pipeline().parameters.p_flightDate",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_airline_raw_adls",
+						"type": "DatasetReference",
+						"parameters": {
+							"p_folder": "airlineperformance/flights",
+							"p_filename": {
+								"value": "flights_@{pipeline().parameters.p_ingestionDate}_@{pipeline().parameters.p_runTime}_@{variables('v_offset')}.json",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"p_ingestionDate": {
+				"type": "string",
+				"defaultValue": "2026-02-24"
+			},
+			"p_runTime": {
+				"type": "string",
+				"defaultValue": "0100"
+			},
+			"p_flightDate": {
+				"type": "string",
+				"defaultValue": "2026-02-23"
+			},
+			"p_apiKey": {
+				"type": "string",
+				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
+			},
+			"p_offsetStart": {
+				"type": "string",
+				"defaultValue": "0"
+			}
+		},
+		"variables": {
+			"v_offset": {
+				"type": "String"
+			},
+			"v_hasMore": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "source_raw"
+		},
+		"annotations": []
+	}
+}

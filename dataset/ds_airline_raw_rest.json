@@ -1,0 +1,30 @@
+{
+	"name": "ds_airline_raw_rest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_aviation",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_access_key": {
+				"type": "string",
+				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
+			},
+			"p_offset": {
+				"type": "string"
+			},
+			"p_flight_date": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "/v1/flights?access_key=@{dataset().p_access_key}",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	}
+}
