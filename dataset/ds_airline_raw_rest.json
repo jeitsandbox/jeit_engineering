@@ -24,7 +24,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "/v1/flights?access_key=@{dataset().p_access_key}&min_delay_dep=@{dataset().min_delay_dep}",
+				"value": "/v1/flights?access_key=@{dataset().p_access_key}&min_delay_dep=@{dataset().min_delay_dep}&offset=@{dataset().p_offset}",
 				"type": "Expression"
 			}
 		},

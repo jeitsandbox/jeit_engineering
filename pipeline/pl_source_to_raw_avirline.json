@@ -156,7 +156,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "v_nextCallCount",
-								"value": "@add(variables('v_callCount'),1)"
+								"value": {
+									"value": "@add(variables('v_callCount'),1)",
+									"type": "Expression"
+								}
 							}
 						},
 						{
@@ -177,7 +180,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "v_callCount",
-								"value": "@variables('v_nextCallCount')"
+								"value": {
+									"value": "@variables('v_nextCallCount')",
+									"type": "Expression"
+								}
 							}
 						}
 					],
@@ -188,15 +194,15 @@
 		"parameters": {
 			"p_ingestionDate": {
 				"type": "string",
-				"defaultValue": "2026-02-24"
+				"defaultValue": "2026-02-25"
 			},
 			"p_runTime": {
 				"type": "string",
-				"defaultValue": "0100"
+				"defaultValue": "1840"
 			},
 			"p_flightDate": {
 				"type": "string",
-				"defaultValue": "2026-02-23"
+				"defaultValue": "2026-02-24"
 			},
 			"p_apiKey": {
 				"type": "string",
@@ -212,7 +218,7 @@
 			},
 			"p_maxApiCalls": {
 				"type": "int",
-				"defaultValue": 1
+				"defaultValue": 8
 			}
 		},
 		"variables": {
