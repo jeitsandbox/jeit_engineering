@@ -3,42 +3,62 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "cs_raw",
-				"type": "ExecutePipeline",
+				"name": "flow",
+				"type": "ForEach",
 				"dependsOn": [],
-				"policy": {
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pl_cs_raw",
-						"type": "PipelineReference"
+					"items": {
+						"value": "@pipeline().parameters.p_sources",
+						"type": "Expression"
 					},
-					"waitOnCompletion": true
-				}
-			},
-			{
-				"name": "cs_trusted",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "cs_raw",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "pl_cs_raw_trusted",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "cs_raw",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_cs_raw",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"p_relativeUrl": "@item().relativeUrl",
+									"p_sinkFolder": "@item().sinkFolder",
+									"p_sourceName": "@item().name"
+								}
+							}
+						},
+						{
+							"name": "cs_trusted",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "cs_raw",
+									"dependencyConditions": [
+										"Completed"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_cs_raw_trusted",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					]
 				}
 			}
 		],
