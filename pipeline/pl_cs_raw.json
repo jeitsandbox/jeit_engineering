@@ -155,16 +155,18 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_rest_coinbase_exchange_rates",
+						"referenceName": "ds_rest_coingecko_markets",
 						"type": "DatasetReference",
 						"parameters": {
-							"base_currency": "USD"
+							"vs_currency": "usd",
+							"per_page": 250,
+							"page": 1
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_blob_bronze_coinbase_json",
+						"referenceName": "ds_blob_bronze_coingecko_json",
 						"type": "DatasetReference",
 						"parameters": {
 							"p_sinkFolder": "@pipeline().parameters.p_sinkFolder"
