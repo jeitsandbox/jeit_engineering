@@ -1,0 +1,31 @@
+{
+	"name": "pl_trusted_to_provisioned_airline",
+	"properties": {
+		"activities": [
+			{
+				"name": "trusted_to_provisioned",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/airlineperformance/Provisioned"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azuredatabricks_dev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "trusted_provisioned"
+		},
+		"annotations": []
+	}
+}
