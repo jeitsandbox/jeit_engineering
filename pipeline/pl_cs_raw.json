@@ -111,14 +111,19 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "ForEach1",
-				"type": "ForEach",
-				"dependsOn": [],
-				"userProperties": []
 			}
 		],
+		"parameters": {
+			"p_relativeUrl": {
+				"type": "string"
+			},
+			"p_sinkFolder": {
+				"type": "string"
+			},
+			"p_sourceName": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
