@@ -17,7 +17,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "/v2/exchange-rates?currency=USD"
+			"relativeUrl": "@concat('/v2/exchange-rates?currency=', dataset().base_currency)"
 		},
 		"schema": []
 	}

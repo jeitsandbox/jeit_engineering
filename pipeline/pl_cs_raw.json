@@ -1,5 +1,5 @@
 {
-	"name": "pl_01_cs_raw_dev_main",
+	"name": "pl_cs_raw",
 	"properties": {
 		"activities": [
 			{
@@ -49,14 +49,27 @@
 				"outputs": [
 					{
 						"referenceName": "ds_blob_bronze_coinbase_json",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"p_sinkFolder": {
+								"value": "cryptosense/coinbase/exchange-rates",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
 			{
 				"name": "copy_coingecko_to_blob_bronze",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "copy_coinbase_to_blob_bronze",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -101,90 +114,26 @@
 				"outputs": [
 					{
 						"referenceName": "ds_blob_bronze_coingecko_json",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"p_sinkFolder": {
+								"value": "cryptosense/coingecko/markets",
+								"type": "Expression"
+							}
+						}
 					}
 				]
-			},
-			{
-				"name": "02_1_Silver_Streaming_AutoLoader",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "copy_coinbase_to_blob_bronze",
-						"dependencyConditions": [
-							"Completed"
-						]
-					},
-					{
-						"activity": "copy_coingecko_to_blob_bronze",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Shared/Cryptosense/02_1_Silver_Streaming_AutoLoader"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_azuredatabricks_dev",
-					"type": "LinkedServiceReference"
-				}
 			}
 		],
 		"parameters": {
-			"environment": {
-				"type": "string",
-				"defaultValue": "dev"
+			"p_relativeUrl": {
+				"type": "string"
 			},
-			"catalog_name": {
-				"type": "string",
-				"defaultValue": "jeit_kg_dev"
+			"p_sinkFolder": {
+				"type": "string"
 			},
-			"schema_name": {
-				"type": "string",
-				"defaultValue": "trusted_cryptosense"
-			},
-			"notebook_path": {
-				"type": "string",
-				"defaultValue": "/Shared/Cryptosense/02_1_Silver_Streaming_AutoLoader"
-			},
-			"storage_account": {
-				"type": "string",
-				"defaultValue": "jeitstorageaccountdev"
-			},
-			"container_name": {
-				"type": "string",
-				"defaultValue": "raw"
-			},
-			"bronze_base_path": {
-				"type": "string",
-				"defaultValue": "cryptosense"
-			},
-			"checkpoint_base_path": {
-				"type": "string",
-				"defaultValue": "cryptosense/_checkpoints"
-			},
-			"schema_location_base_path": {
-				"type": "string",
-				"defaultValue": "cryptosense/_schemas"
-			}
-		},
-		"variables": {
-			"execution_start_time": {
-				"type": "String",
-				"defaultValue": "@utcnow()"
-			},
-			"should_send_alert": {
-				"type": "Boolean",
-				"defaultValue": false
+			"p_sourceName": {
+				"type": "string"
 			}
 		},
 		"annotations": []
