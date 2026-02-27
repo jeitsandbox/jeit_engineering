@@ -78,6 +78,21 @@
 			"schema_location_base_path": {
 				"type": "string",
 				"defaultValue": "cryptosense/_schemas"
+			},
+			"p_sources": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"name": "coinbase",
+						"relativeUrl": "/v2/exchange-rates?currency=USD",
+						"sinkFolder": "cryptosense/coinbase/exchange-rates"
+					},
+					{
+						"name": "coingecko",
+						"relativeUrl": "/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false",
+						"sinkFolder": "cryptosense/coingecko/markets"
+					}
+				]
 			}
 		},
 		"variables": {
