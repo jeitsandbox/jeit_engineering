@@ -1,141 +1,44 @@
 {
-	"name": "pl_01_cs_raw_dev_main",
+	"name": "pl_cs_main",
 	"properties": {
 		"activities": [
 			{
-				"name": "copy_coinbase_to_blob_bronze",
-				"description": "copy sactivity",
-				"type": "Copy",
+				"name": "cs_raw",
+				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"paginationRules": {
-							"supportRFC5988": "true"
-						}
+					"pipeline": {
+						"referenceName": "pl_cs_raw",
+						"type": "PipelineReference"
 					},
-					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_rest_coinbase_exchange_rates",
-						"type": "DatasetReference",
-						"parameters": {
-							"base_currency": "USD"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_blob_bronze_coinbase_json",
-						"type": "DatasetReference"
-					}
-				]
+					"waitOnCompletion": true
+				}
 			},
 			{
-				"name": "copy_coingecko_to_blob_bronze",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "RestSource",
-						"httpRequestTimeout": "00:01:40",
-						"requestInterval": "00.00:00:00.010",
-						"requestMethod": "GET",
-						"paginationRules": {
-							"supportRFC5988": "true"
-						}
-					},
-					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_rest_coingecko_markets",
-						"type": "DatasetReference",
-						"parameters": {
-							"vs_currency": "usd",
-							"per_page": 250,
-							"page": 1
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_blob_bronze_coingecko_json",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "02_1_Silver_Streaming_AutoLoader",
-				"type": "DatabricksNotebook",
+				"name": "cs_trusted",
+				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "copy_coinbase_to_blob_bronze",
-						"dependencyConditions": [
-							"Completed"
-						]
-					},
-					{
-						"activity": "copy_coingecko_to_blob_bronze",
+						"activity": "cs_raw",
 						"dependencyConditions": [
 							"Completed"
 						]
 					}
 				],
 				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/Cryptosense/02_1_Silver_Streaming_AutoLoader"
-				},
-				"linkedServiceName": {
-					"referenceName": "ls_azuredatabricks_dev",
-					"type": "LinkedServiceReference"
+					"pipeline": {
+						"referenceName": "pl_cs_raw_trusted",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],
