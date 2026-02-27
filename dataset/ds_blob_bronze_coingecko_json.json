@@ -5,6 +5,11 @@
 			"referenceName": "ls_blob_bronze",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"p_sinkFolder": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "cryptosense_kp"
 		},
@@ -13,10 +18,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": {
-					"value": "cryptosense/coingecko/markets/@{formatDateTime(utcnow(),'yyyyMMdd')}/@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}",
-					"type": "Expression"
-				},
+				"folderPath": "@concat(   dataset().p_sinkFolder, '/',   formatDateTime(utcnow(),'yyyyMMdd'), '/',   formatDateTime(utcnow(),'yyyyMMddHHmmss') )",
 				"container": "raw"
 			}
 		},
