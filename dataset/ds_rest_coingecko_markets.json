@@ -25,7 +25,10 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h"
+			"relativeUrl": {
+				"value": "@concat(\n  '/api/v3/coins/markets?vs_currency=',\n  dataset().vs_currency,\n  '&order=market_cap_desc&per_page=',\n  string(dataset().per_page),\n  '&page=1&sparkline=false&price_change_percentage=24h'\n)",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
