@@ -56,7 +56,14 @@
 			{
 				"name": "copy_coingecko_to_blob_bronze",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "copy_coinbase_to_blob_bronze",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
