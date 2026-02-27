@@ -51,7 +51,10 @@
 						"referenceName": "ds_blob_bronze_coinbase_json",
 						"type": "DatasetReference",
 						"parameters": {
-							"p_sinkFolder": "@pipeline().parameters.p_sinkFolder"
+							"p_sinkFolder": {
+								"value": "cryptosense/coinbase/exchange-rates",
+								"type": "Expression"
+							}
 						}
 					}
 				]
@@ -113,7 +116,10 @@
 						"referenceName": "ds_blob_bronze_coingecko_json",
 						"type": "DatasetReference",
 						"parameters": {
-							"p_sinkFolder": "@pipeline().parameters.p_sinkFolder"
+							"p_sinkFolder": {
+								"value": "cryptosense/coingecko/markets",
+								"type": "Expression"
+							}
 						}
 					}
 				]
