@@ -17,8 +17,8 @@
 				"typeProperties": {
 					"notebookPath": "/Shared/airlineperformance/Trusted",
 					"baseParameters": {
-						"p_flightDate": {
-							"value": "@pipeline().parameters.p_flightDate",
+						"p_ingestionDate": {
+							"value": "@pipeline().parameters.p_ingestionDate",
 							"type": "Expression"
 						},
 						"p_raw_path": {
@@ -38,8 +38,9 @@
 			}
 		],
 		"parameters": {
-			"p_flightDate": {
-				"type": "string"
+			"p_ingestionDate": {
+				"type": "string",
+				"defaultValue": "2026-02-28"
 			},
 			"p_raw_path": {
 				"type": "string",
