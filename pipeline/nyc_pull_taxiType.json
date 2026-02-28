@@ -5,6 +5,8 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
@@ -42,6 +44,94 @@
 										"type": "Expression"
 									}
 								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "If Yellow Condition",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@contains(pipeline().parameters.taxiTypeArray,'yellow')",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Notebook4",
+							"type": "DatabricksNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/ashley@mumerqaisaroutlook.onmicrosoft.com/NYC_TLC_Data/Yellow_Taxi_Raw_Trusted",
+								"baseParameters": {
+									"yearArray": {
+										"value": "@string(pipeline().parameters.yearArray)",
+										"type": "Expression"
+									},
+									"monthArray": {
+										"value": "@string(pipeline().parameters.monthArray)",
+										"type": "Expression"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_azuredatabricks_dev",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "If Green Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@contains(pipeline().parameters.taxiTypeArray,'green')",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Notebook3",
+							"type": "DatabricksNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Users/ashley@mumerqaisaroutlook.onmicrosoft.com/NYC_TLC_Data/Green_Taxi_Raw_Trusted",
+								"baseParameters": {
+									"yearArray": {
+										"value": "@string(pipeline().parameters.yearArray)",
+										"type": "Expression"
+									},
+									"monthArray": {
+										"value": "@string(pipeline().parameters.monthArray)",
+										"type": "Expression"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_azuredatabricks_dev",
+								"type": "LinkedServiceReference"
 							}
 						}
 					]
