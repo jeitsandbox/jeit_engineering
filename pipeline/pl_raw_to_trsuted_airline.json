@@ -15,7 +15,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/airlineperformance/Trusted"
+					"notebookPath": "/Shared/airlineperformance/Trusted",
+					"baseParameters": {
+						"p_flightDate": {
+							"value": "@pipeline().parameters.p_flightDate",
+							"type": "Expression"
+						},
+						"p_raw_path": {
+							"value": "@pipeline().parameters.p_raw_path",
+							"type": "Expression"
+						},
+						"p_trusted_table": {
+							"value": "@pipeline().parameters.p_trusted_table",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_azuredatabricks_dev",
@@ -23,6 +37,19 @@
 				}
 			}
 		],
+		"parameters": {
+			"p_flightDate": {
+				"type": "string"
+			},
+			"p_raw_path": {
+				"type": "string",
+				"defaultValue": "abfss://raw@jeitstorageaccountdev.dfs.core.windows.net/airlineperformance/flights/"
+			},
+			"p_trusted_table": {
+				"type": "string",
+				"defaultValue": "trusted_airline.flight_delays"
+			}
+		},
 		"folder": {
 			"name": "raw_trusted"
 		},

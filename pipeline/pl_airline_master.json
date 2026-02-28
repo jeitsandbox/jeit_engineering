@@ -15,7 +15,33 @@
 						"referenceName": "pl_source_to_raw_avirline",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"p_ingestionDate": {
+							"value": "@pipeline().parameters.p_ingestionDate",
+							"type": "Expression"
+						},
+						"p_runTime": {
+							"value": "@pipeline().parameters.p_runTime",
+							"type": "Expression"
+						},
+						"p_flightDate": {
+							"value": "@pipeline().parameters.p_flightDate",
+							"type": "Expression"
+						},
+						"p_apiKey": {
+							"value": "@pipeline().parameters.p_apiKey",
+							"type": "Expression"
+						},
+						"p_min_delay_dep": {
+							"value": "@pipeline().parameters.p_min_delay_dep",
+							"type": "Expression"
+						},
+						"p_maxApiCalls": {
+							"value": "@pipeline().parameters.p_maxApiCalls",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -38,10 +64,58 @@
 						"referenceName": "pl_raw_to_trsuted_airline",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"p_flightDate": {
+							"value": "@pipeline().parameters.p_flightDate",
+							"type": "Expression"
+						},
+						"p_raw_path": {
+							"value": "@pipeline().parameters.p_raw_path",
+							"type": "Expression"
+						},
+						"p_trusted_table": {
+							"value": "@pipeline().parameters.p_trusted_table",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
+		"parameters": {
+			"p_ingestionDate": {
+				"type": "string",
+				"defaultValue": "2026-02-25"
+			},
+			"p_runTime": {
+				"type": "string",
+				"defaultValue": "1840"
+			},
+			"p_flightDate": {
+				"type": "string",
+				"defaultValue": "2026-02-24"
+			},
+			"p_apiKey": {
+				"type": "string",
+				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
+			},
+			"p_min_delay_dep": {
+				"type": "string",
+				"defaultValue": "15"
+			},
+			"p_maxApiCalls": {
+				"type": "string",
+				"defaultValue": "8"
+			},
+			"p_raw_path": {
+				"type": "string",
+				"defaultValue": "abfss://raw@jeitstorageaccountdev.dfs.core.windows.net/airlineperformance/flights/"
+			},
+			"p_trusted_table": {
+				"type": "string",
+				"defaultValue": "trusted_airline.flight_delays"
+			}
+		},
 		"annotations": []
 	}
 }
