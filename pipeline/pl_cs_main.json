@@ -17,7 +17,16 @@
 						{
 							"name": "cs_raw",
 							"type": "ExecutePipeline",
-							"dependsOn": [],
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
+							"dependsOn": [
+								{
+									"activity": "Ingestion DateTime",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"secureInput": false
 							},
@@ -29,20 +38,31 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
-									"p_relativeUrl": "@item().relativeUrl",
-									"p_sinkFolder": "@item().sinkFolder",
-									"p_sourceName": "@item().name"
+									"p_relativeUrl": {
+										"value": "@item().relativeUrl",
+										"type": "Expression"
+									},
+									"p_sinkFolder": {
+										"value": "@item().sinkFolder",
+										"type": "Expression"
+									},
+									"p_sourceName": {
+										"value": "@item().name",
+										"type": "Expression"
+									}
 								}
 							}
 						},
 						{
 							"name": "cs_trusted",
 							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "cs_raw",
 									"dependencyConditions": [
-										"Completed"
+										"Succeeded"
 									]
 								}
 							],
@@ -56,6 +76,56 @@
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true
+							}
+						},
+						{
+							"name": "cs_provisioned",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "cs_trusted",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_cs_trusted_provisioned",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"path": {
+										"value": "@pipeline().parameters.notebook_path_provisioned",
+										"type": "Expression"
+									},
+									"odate": {
+										"value": "@variables('execution_start_time')",
+										"type": "Expression"
+									}
+								}
+							}
+						},
+						{
+							"name": "Ingestion DateTime",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "execution_start_time",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
 							}
 						}
 					]
@@ -113,6 +183,10 @@
 						"sinkFolder": "cryptosense/coingecko/markets"
 					}
 				]
+			},
+			"notebook_path_provisioned": {
+				"type": "string",
+				"defaultValue": "/Shared/Cryptosense/03_Provisioned_Transformations"
 			}
 		},
 		"variables": {
