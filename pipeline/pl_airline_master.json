@@ -12,7 +12,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_source_to_raw_avirline",
+						"referenceName": "pl_source_to_raw_airline",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true,
@@ -61,7 +61,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_raw_to_trsuted_airline",
+						"referenceName": "pl_raw_to_trusted_airline",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true,
