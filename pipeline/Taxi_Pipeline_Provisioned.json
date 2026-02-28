@@ -1,0 +1,88 @@
+{
+	"name": "Taxi_Pipeline_Provisioned",
+	"properties": {
+		"activities": [
+			{
+				"name": "Green_Taxi_Provisioned",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/ashley@mumerqaisaroutlook.onmicrosoft.com/NYC_TLC_Data/Green_Taxi_Provisioned",
+					"baseParameters": {
+						"yearArray": {
+							"value": "@pipeline().parameters.yearArray",
+							"type": "Expression"
+						},
+						"monthArray": {
+							"value": "@pipeline().parameters.monthArray",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azuredatabricks_dev",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Yellow_Taxi_Provisioned",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Green_Taxi_Provisioned",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/ashley@mumerqaisaroutlook.onmicrosoft.com/NYC_TLC_Data/Yellow_Taxi_Provisioned",
+					"baseParameters": {
+						"yearArray": {
+							"value": "@pipeline().parameters.yearArray",
+							"type": "Expression"
+						},
+						"monthArray": {
+							"value": "@pipeline().parameters.monthArray",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_azuredatabricks_dev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"yearArray": {
+				"type": "string",
+				"defaultValue": "2023,2024,2025"
+			},
+			"monthArray": {
+				"type": "string",
+				"defaultValue": "1,2,3,4,5,6,7,8,9,10,11,12"
+			}
+		},
+		"folder": {
+			"name": "NYC_DATA"
+		},
+		"annotations": []
+	}
+}
