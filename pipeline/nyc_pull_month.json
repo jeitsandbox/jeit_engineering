@@ -90,7 +90,7 @@
 											"type": "Expression"
 										},
 										"month": {
-											"value": "@item()",
+											"value": "@if(less(item(),10),\nconcat('0',string(item())),\nitem()\n)",
 											"type": "Expression"
 										}
 									}
