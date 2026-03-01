@@ -5,11 +5,30 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Month array validation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Year array validation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Taxi type array validation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@pipeline().parameters.taxiTypeArray",
+						"value": "@activity('Taxi type array validation').output.value",
 						"type": "Expression"
 					},
 					"isSequential": false,
@@ -34,11 +53,11 @@
 										"type": "Expression"
 									},
 									"yearArray": {
-										"value": "@pipeline().parameters.yearArray",
+										"value": "@activity('Year array validation').output.value",
 										"type": "Expression"
 									},
 									"monthArray": {
-										"value": "@pipeline().parameters.monthArray",
+										"value": "@activity('Month array validation').output.value",
 										"type": "Expression"
 									}
 								}
@@ -239,6 +258,54 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "Taxi type array validation",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.taxiTypeArray",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(\n    createArray('yellow','green'),\n    toLower(string(item()))\n)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Year array validation",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.yearArray",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(\n    createArray(2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025),\n    item()\n)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Month array validation",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.monthArray",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(\n    createArray(1,2,3,4,5,6,7,8,9,10,11,12),\n    item()\n)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
@@ -273,6 +340,17 @@
 					11,
 					12
 				]
+			}
+		},
+		"variables": {
+			"taxi type export": {
+				"type": "Array"
+			},
+			"year export": {
+				"type": "Array"
+			},
+			"month export": {
+				"type": "Array"
 			}
 		},
 		"folder": {
