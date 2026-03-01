@@ -1,0 +1,12 @@
+{
+	"name": "ls_nyc_cf_zone_data",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
