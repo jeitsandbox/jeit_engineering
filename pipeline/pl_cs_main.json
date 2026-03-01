@@ -17,8 +17,6 @@
 						{
 							"name": "cs_raw",
 							"type": "ExecutePipeline",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Ingestion DateTime",
@@ -56,8 +54,6 @@
 						{
 							"name": "cs_trusted",
 							"type": "ExecutePipeline",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "cs_raw",
