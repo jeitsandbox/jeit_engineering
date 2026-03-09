@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "flow",
+				"description": "///",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],

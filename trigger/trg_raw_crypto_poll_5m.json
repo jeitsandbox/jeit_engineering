@@ -1,6 +1,7 @@
 {
 	"name": "trg_raw_crypto_poll_5m",
 	"properties": {
+		"description": "something",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [
