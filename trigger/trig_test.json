@@ -1,0 +1,24 @@
+{
+	"name": "trig_test",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2026-03-10T14:40:00",
+				"timeZone": "SA Pacific Standard Time"
+			}
+		}
+	}
+}
