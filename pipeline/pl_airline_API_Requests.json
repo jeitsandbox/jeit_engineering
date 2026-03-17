@@ -10,7 +10,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greaterOrEquals(variables('v_offset'), variables('v_total'))",
+						"value": "@greaterOrEquals(variables('v_offset'), pipeline().parameters.p_total)",
 						"type": "Expression"
 					},
 					"activities": [
@@ -95,7 +95,7 @@
 							"type": "SetVariable",
 							"dependsOn": [
 								{
-									"activity": "Set variable TOTAL",
+									"activity": "Copy data source to raw_json",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -137,27 +137,6 @@
 									"type": "Expression"
 								}
 							}
-						},
-						{
-							"name": "Set variable TOTAL",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Copy data source to raw_json",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "v_total",
-								"value": ""
-							}
 						}
 					],
 					"timeout": "0.12:00:00"
@@ -182,6 +161,9 @@
 			},
 			"p_runTime": {
 				"type": "string"
+			},
+			"p_total": {
+				"type": "string"
 			}
 		},
 		"variables": {
@@ -191,10 +173,6 @@
 			},
 			"v_nextOffset": {
 				"type": "Integer"
-			},
-			"v_total": {
-				"type": "Integer",
-				"defaultValue": 999999
 			}
 		},
 		"folder": {

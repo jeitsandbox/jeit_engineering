@@ -16,7 +16,14 @@
 						{
 							"name": "Execute API Request Arrival",
 							"type": "ExecutePipeline",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Web get_total_arr",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"secureInput": false
 							},
@@ -48,6 +55,10 @@
 									"p_runTime": {
 										"value": "@pipeline().parameters.p_runTime",
 										"type": "Expression"
+									},
+									"p_total": {
+										"value": "@int(activity('Web get_total_arr').output.pagination.total)",
+										"type": "Expression"
 									}
 								}
 							}
@@ -57,7 +68,7 @@
 							"type": "ExecutePipeline",
 							"dependsOn": [
 								{
-									"activity": "Execute API Request Arrival",
+									"activity": "Web get_total_dep",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -94,7 +105,58 @@
 									"p_runTime": {
 										"value": "@pipeline().parameters.p_runTime",
 										"type": "Expression"
+									},
+									"p_total": {
+										"value": "@int(activity('Web get_total_dep').output.pagination.total)",
+										"type": "Expression"
 									}
+								}
+							}
+						},
+						{
+							"name": "Web get_total_arr",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "GET",
+								"url": {
+									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?arr_icao=',\nitem(),\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n)\n\n",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Web get_total_dep",
+							"type": "WebActivity",
+							"dependsOn": [
+								{
+									"activity": "Execute API Request Arrival",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "GET",
+								"url": {
+									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?dep_icao=',\nitem(),\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n)\n\n",
+									"type": "Expression"
 								}
 							}
 						}
