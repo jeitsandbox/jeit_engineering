@@ -3,187 +3,102 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Until API Call Count Exceeded",
-				"description": "This limits the number of API calls made due to pagination and API limits",
-				"type": "Until",
+				"name": "ForEach Airport",
+				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"expression": {
-						"value": "@greaterOrEquals(variables('v_callCount'), pipeline().parameters.p_maxApiCalls)",
+					"items": {
+						"value": "@pipeline().parameters.p_airports",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "Copy data source to raw_json",
-							"description": "Queries api endpoint and copies data to json files in ADLS",
-							"type": "Copy",
+							"name": "Execute API Request Arrival",
+							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
 								"secureInput": false
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"source": {
-									"type": "RestSource",
-									"httpRequestTimeout": "00:01:40",
-									"requestInterval": "00.00:00:00.010",
-									"requestMethod": "GET",
-									"paginationRules": {
-										"supportRFC5988": "true"
-									}
+								"pipeline": {
+									"referenceName": "pl_airline_API_Requests",
+									"type": "PipelineReference"
 								},
-								"sink": {
-									"type": "JsonSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+								"waitOnCompletion": true,
+								"parameters": {
+									"p_airport": {
+										"value": "@item()",
+										"type": "Expression"
 									},
-									"formatSettings": {
-										"type": "JsonWriteSettings"
+									"p_direction": "arr",
+									"p_apiKey": {
+										"value": "@pipeline().parameters.p_apiKey",
+										"type": "Expression"
+									},
+									"p_flightDate": {
+										"value": "@pipeline().parameters.p_flightDate",
+										"type": "Expression"
+									},
+									"p_ingestionDate": {
+										"value": "@pipeline().parameters.p_ingestionDate",
+										"type": "Expression"
+									},
+									"p_runTime": {
+										"value": "@pipeline().parameters.p_runTime",
+										"type": "Expression"
 									}
+								}
+							}
+						},
+						{
+							"name": "Execute API Request Departure",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Execute API Request Arrival",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_airline_API_Requests",
+									"type": "PipelineReference"
 								},
-								"enableStaging": false
-							},
-							"inputs": [
-								{
-									"referenceName": "ds_airline_raw_rest",
-									"type": "DatasetReference",
-									"parameters": {
-										"p_access_key": {
-											"value": "@pipeline().parameters.p_apiKey",
-											"type": "Expression"
-										},
-										"p_offset": {
-											"value": "@variables('v_offset')",
-											"type": "Expression"
-										},
-										"p_flight_date": {
-											"value": "@pipeline().parameters.p_flightDate",
-											"type": "Expression"
-										}
+								"waitOnCompletion": true,
+								"parameters": {
+									"p_airport": {
+										"value": "@item()",
+										"type": "Expression"
+									},
+									"p_direction": "dep",
+									"p_apiKey": {
+										"value": "@pipeline().parameters.p_apiKey",
+										"type": "Expression"
+									},
+									"p_flightDate": {
+										"value": "@pipeline().parameters.p_flightDate",
+										"type": "Expression"
+									},
+									"p_ingestionDate": {
+										"value": "@pipeline().parameters.p_ingestionDate",
+										"type": "Expression"
+									},
+									"p_runTime": {
+										"value": "@pipeline().parameters.p_runTime",
+										"type": "Expression"
 									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_airline_raw_adls",
-									"type": "DatasetReference",
-									"parameters": {
-										"p_folder": {
-											"value": "airlineperformance/flights/@{pipeline().parameters.p_ingestionDate}",
-											"type": "Expression"
-										},
-										"p_filename": {
-											"value": "flights_@{pipeline().parameters.p_ingestionDate}_@{pipeline().parameters.p_runTime}_@{variables('v_offset')}.json",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
-							"name": "Set variable Temp Pagination Offset",
-							"description": "This increases the pagination offset to pull more data from the api",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Copy data source to raw_json",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "v_nextOffset",
-								"value": {
-									"value": "@add(variables('v_offset'),100)",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set variable Increment Pagination Offset",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Set variable Temp Pagination Offset",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "v_offset",
-								"value": {
-									"value": "@variables('v_nextOffset')",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set variable callCount Temp",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Set variable Increment Pagination Offset",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "v_nextCallCount",
-								"value": {
-									"value": "@add(variables('v_callCount'),1)",
-									"type": "Expression"
-								}
-							}
-						},
-						{
-							"name": "Set variable Increment callCount",
-							"type": "SetVariable",
-							"dependsOn": [
-								{
-									"activity": "Set variable callCount Temp",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "v_callCount",
-								"value": {
-									"value": "@variables('v_nextCallCount')",
-									"type": "Expression"
 								}
 							}
 						}
-					],
-					"timeout": "0.12:00:00"
+					]
 				}
 			}
 		],
@@ -204,10 +119,6 @@
 				"type": "string",
 				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
 			},
-			"p_maxApiCalls": {
-				"type": "int",
-				"defaultValue": 8
-			},
 			"p_airports": {
 				"type": "array",
 				"defaultValue": [
@@ -215,29 +126,6 @@
 					"MKJS",
 					"MKBS"
 				]
-			},
-			"p_directions": {
-				"type": "array",
-				"defaultValue": [
-					"arr",
-					"dep"
-				]
-			}
-		},
-		"variables": {
-			"v_offset": {
-				"type": "Integer",
-				"defaultValue": 0
-			},
-			"v_callCount": {
-				"type": "Integer",
-				"defaultValue": 0
-			},
-			"v_nextCallCount": {
-				"type": "Integer"
-			},
-			"v_nextOffset": {
-				"type": "Integer"
 			}
 		},
 		"folder": {

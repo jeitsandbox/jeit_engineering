@@ -1,0 +1,205 @@
+{
+	"name": "pl_airline_API_Requests",
+	"properties": {
+		"activities": [
+			{
+				"name": "Until all records pulled",
+				"description": "This limits the number of API calls made due to pagination and API limits",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greaterOrEquals(variables('v_offset'), variables('v_total'))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data source to raw_json",
+							"description": "Queries api endpoint and copies data to json files in ADLS",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_airline_raw_rest",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_access_key": {
+											"value": "@pipeline().parameters.p_apiKey",
+											"type": "Expression"
+										},
+										"p_offset": {
+											"value": "@variables('v_offset')",
+											"type": "Expression"
+										},
+										"p_flight_date": {
+											"value": "@pipeline().parameters.p_flightDate",
+											"type": "Expression"
+										},
+										"p_direction": {
+											"value": "@pipeline().parameters.p_direction",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_airline_raw_adls",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_folder": {
+											"value": "airlineperformance/flights/@{pipeline().parameters.p_ingestionDate}",
+											"type": "Expression"
+										},
+										"p_filename": {
+											"value": "flights_@{pipeline().parameters.p_ingestionDate}_@{pipeline().parameters.p_runTime}_@{pipeline().parameters.p_airport}_@{pipeline().parameters.p_direction}_@{variables('v_offset')}.json",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Set variable Temp Pagination Offset",
+							"description": "This increases the pagination offset to pull more data from the api",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set variable TOTAL",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_nextOffset",
+								"value": {
+									"value": "@add(variables('v_offset'),100)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable Increment Pagination Offset",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set variable Temp Pagination Offset",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_offset",
+								"value": {
+									"value": "@variables('v_nextOffset')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable TOTAL",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Copy data source to raw_json",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_total",
+								"value": ""
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"parameters": {
+			"p_airport": {
+				"type": "string"
+			},
+			"p_direction": {
+				"type": "string"
+			},
+			"p_apiKey": {
+				"type": "string"
+			},
+			"p_flightDate": {
+				"type": "string"
+			},
+			"p_ingestionDate": {
+				"type": "string"
+			},
+			"p_runTime": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"v_offset": {
+				"type": "Integer",
+				"defaultValue": 0
+			},
+			"v_nextOffset": {
+				"type": "Integer"
+			},
+			"v_total": {
+				"type": "Integer",
+				"defaultValue": 999999
+			}
+		},
+		"folder": {
+			"name": "source_raw"
+		},
+		"annotations": []
+	}
+}
