@@ -64,10 +64,6 @@
 										"p_flight_date": {
 											"value": "@pipeline().parameters.p_flightDate",
 											"type": "Expression"
-										},
-										"min_delay_dep": {
-											"value": "@pipeline().parameters.p_min_delay_dep",
-											"type": "Expression"
 										}
 									}
 								}
@@ -208,17 +204,24 @@
 				"type": "string",
 				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
 			},
-			"p_offsetStart": {
-				"type": "string",
-				"defaultValue": "0"
-			},
-			"p_min_delay_dep": {
-				"type": "string",
-				"defaultValue": "15"
-			},
 			"p_maxApiCalls": {
 				"type": "int",
 				"defaultValue": 8
+			},
+			"p_airports": {
+				"type": "array",
+				"defaultValue": [
+					"MKJP",
+					"MKJS",
+					"MKBS"
+				]
+			},
+			"p_directions": {
+				"type": "array",
+				"defaultValue": [
+					"arr",
+					"dep"
+				]
 			}
 		},
 		"variables": {

@@ -5,7 +5,14 @@
 			{
 				"name": "Execute source_to_raw",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable runTime",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureInput": false
 				},
@@ -18,11 +25,11 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"p_ingestionDate": {
-							"value": "@pipeline().parameters.p_ingestionDate",
+							"value": "@variables('v_runDate')",
 							"type": "Expression"
 						},
 						"p_runTime": {
-							"value": "@pipeline().parameters.p_runTime",
+							"value": "@variables('v_runTime')",
 							"type": "Expression"
 						},
 						"p_flightDate": {
@@ -31,14 +38,6 @@
 						},
 						"p_apiKey": {
 							"value": "@pipeline().parameters.p_apiKey",
-							"type": "Expression"
-						},
-						"p_min_delay_dep": {
-							"value": "@pipeline().parameters.p_min_delay_dep",
-							"type": "Expression"
-						},
-						"p_maxApiCalls": {
-							"value": "@pipeline().parameters.p_maxApiCalls",
 							"type": "Expression"
 						}
 					}
@@ -67,7 +66,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"p_ingestionDate": {
-							"value": "@pipeline().parameters.p_ingestionDate",
+							"value": "@variables('v_runDate')",
 							"type": "Expression"
 						},
 						"p_raw_path": {
@@ -103,17 +102,50 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "Set variable runDate",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_runDate",
+					"value": {
+						"value": "@formatDateTime(utcNow(), 'yyyy-MM-dd')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable runTime",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable runDate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_runTime",
+					"value": {
+						"value": "@formatDateTime(utcNow(), 'HHmm')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
-			"p_ingestionDate": {
-				"type": "string",
-				"defaultValue": "2026-02-28"
-			},
-			"p_runTime": {
-				"type": "string",
-				"defaultValue": "1840"
-			},
 			"p_flightDate": {
 				"type": "string",
 				"defaultValue": "2026-02-27"
@@ -122,14 +154,6 @@
 				"type": "string",
 				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
 			},
-			"p_min_delay_dep": {
-				"type": "string",
-				"defaultValue": "15"
-			},
-			"p_maxApiCalls": {
-				"type": "int",
-				"defaultValue": 8
-			},
 			"p_raw_path": {
 				"type": "string",
 				"defaultValue": "abfss://raw@jeitstorageaccountdev.dfs.core.windows.net/airlineperformance/flights/"
@@ -137,6 +161,29 @@
 			"p_trusted_table": {
 				"type": "string",
 				"defaultValue": "trusted_airline.flight_delays"
+			},
+			"p_airports": {
+				"type": "array",
+				"defaultValue": [
+					"MKJP",
+					"MKJS",
+					"MKBS"
+				]
+			},
+			"p_directions": {
+				"type": "array",
+				"defaultValue": [
+					"arr",
+					"dep"
+				]
+			}
+		},
+		"variables": {
+			"v_runDate": {
+				"type": "String"
+			},
+			"v_runTime": {
+				"type": "String"
 			}
 		},
 		"annotations": []
