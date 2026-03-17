@@ -68,6 +68,10 @@
 										"p_direction": {
 											"value": "@pipeline().parameters.p_direction",
 											"type": "Expression"
+										},
+										"p_airport": {
+											"value": "@pipeline().parameters.p_airport",
+											"type": "Expression"
 										}
 									}
 								}

@@ -167,7 +167,7 @@
 		"parameters": {
 			"p_ingestionDate": {
 				"type": "string",
-				"defaultValue": "2026-02-25"
+				"defaultValue": "2026-03-17"
 			},
 			"p_runTime": {
 				"type": "string",
