@@ -129,7 +129,7 @@
 							"typeProperties": {
 								"method": "GET",
 								"url": {
-									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?arr_icao=',\nitem(),\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n)\n\n",
+									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?arr_icao=',\nitem(),\n'&flight_date=',pipeline().parameters.p_flightDate,\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n\n)",
 									"type": "Expression"
 								}
 							}
@@ -156,7 +156,7 @@
 							"typeProperties": {
 								"method": "GET",
 								"url": {
-									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?dep_icao=',\nitem(),\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n)\n\n",
+									"value": "@concat(\n'https://api.aviationstack.com/v1/flights?dep_icao=',\nitem(),\n'&flight_date=',pipeline().parameters.p_flightDate,\n'&limit=100',\n'&offset=0',\n'&access_key=',pipeline().parameters.p_apiKey\n)\n\n",
 									"type": "Expression"
 								}
 							}
