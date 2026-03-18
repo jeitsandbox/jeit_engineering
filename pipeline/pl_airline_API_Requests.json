@@ -6,7 +6,14 @@
 				"name": "Until all records pulled",
 				"description": "This limits the number of API calls made due to pagination and API limits",
 				"type": "Until",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable Temp Pagination Offset_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
@@ -144,6 +151,49 @@
 						}
 					],
 					"timeout": "0.12:00:00"
+				}
+			},
+			{
+				"name": "Set variable Temp Pagination Offset_copy1",
+				"description": "This increases the pagination offset to pull more data from the api",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable Temp Pagination Offset_copy1_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_nextOffset",
+					"value": {
+						"value": "@int('0')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable Temp Pagination Offset_copy1_copy1",
+				"description": "This increases the pagination offset to pull more data from the api",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_offset",
+					"value": {
+						"value": "@int('0')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
