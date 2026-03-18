@@ -27,7 +27,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "/v1/flights?access_key=@{dataset().p_access_key}&offset=@{dataset().p_offset}&@{dataset().p_direction}_icao=@{dataset().p_airport}_flight_date=@{dataset().p_flight_date}",
+				"value": "/v1/flights?access_key=@{dataset().p_access_key}&offset=@{dataset().p_offset}&@{dataset().p_direction}_icao=@{dataset().p_airport}&flight_date=@{dataset().p_flight_date}",
 				"type": "Expression"
 			}
 		},
