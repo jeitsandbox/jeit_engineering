@@ -12,11 +12,13 @@
 						"value": "@pipeline().parameters.p_airports",
 						"type": "Expression"
 					},
-					"isSequential": false,
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Execute API Request Arrival",
 							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Web get_total_arr",
@@ -67,6 +69,8 @@
 						{
 							"name": "Execute API Request Departure",
 							"type": "ExecutePipeline",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Web get_total_dep",
@@ -117,7 +121,16 @@
 						{
 							"name": "Web get_total_arr",
 							"type": "WebActivity",
-							"dependsOn": [],
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
+							"dependsOn": [
+								{
+									"activity": "Copy Departure data source to raw_json",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -137,6 +150,8 @@
 						{
 							"name": "Web get_total_dep",
 							"type": "WebActivity",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Execute API Request Arrival",
@@ -160,6 +175,157 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "Copy Arrival data source to raw_json",
+							"description": "Queries api endpoint and copies data to json files in ADLS",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_airline_raw_rest",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_access_key": {
+											"value": "@pipeline().parameters.p_apiKey",
+											"type": "Expression"
+										},
+										"p_flight_date": {
+											"value": "@pipeline().parameters.p_flightDate",
+											"type": "Expression"
+										},
+										"p_direction": "arr",
+										"p_airport": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_airline_raw_adls",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_folder": {
+											"value": "airlineperformance/flights/@{pipeline().parameters.p_flightDate}",
+											"type": "Expression"
+										},
+										"p_filename": {
+											"value": "flights_@{pipeline().parameters.p_flightDate}_@{item()}_arr.json",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Copy Departure data source to raw_json",
+							"description": "Queries api endpoint and copies data to json files in ADLS",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Copy Arrival data source to raw_json",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_airline_raw_rest",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_access_key": {
+											"value": "@pipeline().parameters.p_apiKey",
+											"type": "Expression"
+										},
+										"p_flight_date": {
+											"value": "@pipeline().parameters.p_flightDate",
+											"type": "Expression"
+										},
+										"p_direction": "dep",
+										"p_airport": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_airline_raw_adls",
+									"type": "DatasetReference",
+									"parameters": {
+										"p_folder": {
+											"value": "airlineperformance/flights/@{pipeline().parameters.p_flightDate}",
+											"type": "Expression"
+										},
+										"p_filename": {
+											"value": "flights_@{pipeline().parameters.p_flightDate}_@{item()}_dep.json",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
 					]
 				}
@@ -168,7 +334,7 @@
 		"parameters": {
 			"p_ingestionDate": {
 				"type": "string",
-				"defaultValue": "2026-03-16"
+				"defaultValue": "2026-03-17"
 			},
 			"p_runTime": {
 				"type": "string",

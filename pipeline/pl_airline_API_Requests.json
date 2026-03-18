@@ -64,10 +64,6 @@
 											"value": "@pipeline().parameters.p_apiKey",
 											"type": "Expression"
 										},
-										"p_offset": {
-											"value": "@variables('v_offset')",
-											"type": "Expression"
-										},
 										"p_flight_date": {
 											"value": "@pipeline().parameters.p_flightDate",
 											"type": "Expression"
