@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.p_airports",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute API Request Arrival",
@@ -167,7 +168,7 @@
 		"parameters": {
 			"p_ingestionDate": {
 				"type": "string",
-				"defaultValue": "2026-03-17"
+				"defaultValue": "2026-03-16"
 			},
 			"p_runTime": {
 				"type": "string",
@@ -175,7 +176,7 @@
 			},
 			"p_flightDate": {
 				"type": "string",
-				"defaultValue": "2026-02-24"
+				"defaultValue": "2026-03-17"
 			},
 			"p_apiKey": {
 				"type": "string",

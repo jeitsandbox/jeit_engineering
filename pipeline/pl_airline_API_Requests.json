@@ -82,11 +82,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"p_folder": {
-											"value": "airlineperformance/flights/@{pipeline().parameters.p_ingestionDate}",
+											"value": "airlineperformance/flights/@{pipeline().parameters.p_flightDate}",
 											"type": "Expression"
 										},
 										"p_filename": {
-											"value": "flights_@{pipeline().parameters.p_ingestionDate}_@{pipeline().parameters.p_runTime}_@{pipeline().parameters.p_airport}_@{pipeline().parameters.p_direction}_@{variables('v_offset')}.json",
+											"value": "flights_@{pipeline().parameters.p_flightDate}_@{pipeline().parameters.p_airport}_@{pipeline().parameters.p_direction}_@{variables('v_offset')}.json",
 											"type": "Expression"
 										}
 									}
