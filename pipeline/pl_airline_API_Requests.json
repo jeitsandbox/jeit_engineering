@@ -199,25 +199,32 @@
 		],
 		"parameters": {
 			"p_airport": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "MKJP"
 			},
 			"p_direction": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "arr"
 			},
 			"p_apiKey": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "92bb3268b5d133d2489e40e3cf3fd07d"
 			},
 			"p_flightDate": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2026-03-17"
 			},
 			"p_ingestionDate": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2026-03-17"
 			},
 			"p_runTime": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "1800"
 			},
 			"p_total": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "40"
 			}
 		},
 		"variables": {
