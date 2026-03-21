@@ -39,6 +39,10 @@
 						"p_apiKey": {
 							"value": "@pipeline().parameters.p_apiKey",
 							"type": "Expression"
+						},
+						"p_airports": {
+							"value": "@pipeline().parameters.p_airports",
+							"type": "Expression"
 						}
 					}
 				}
@@ -66,7 +70,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"p_ingestionDate": {
-							"value": "@variables('v_runDate')",
+							"value": "@pipeline().parameters.p_flightDate",
 							"type": "Expression"
 						},
 						"p_raw_path": {
@@ -83,6 +87,8 @@
 			{
 				"name": "Execute trusted_provisioned",
 				"type": "ExecutePipeline",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Execute raw_trusted",
@@ -148,7 +154,7 @@
 		"parameters": {
 			"p_flightDate": {
 				"type": "string",
-				"defaultValue": "2026-02-27"
+				"defaultValue": "2026-03-11"
 			},
 			"p_apiKey": {
 				"type": "string",
